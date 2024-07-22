@@ -6,11 +6,18 @@
 	<title>Display</title>
 </head>
 <body>
-<h1>these are the quotes you submitted:</h1>
-{%for i in quotes%}
-<li>{{i}}</li>
-{%endfor%}
+<h1>These are all the quotes submitted:</h1>
+{% for i in all_quotes.values() %}
+<li>
+	text: {{ i['text'] }}
+</li>
+<li>
+	who said: {{ i['said_by'] }}
+</li>
+<br>
 
+	
+
+{% endfor %}
 </body>
 </html>
-
