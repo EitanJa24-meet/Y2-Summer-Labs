@@ -7,10 +7,10 @@
 </head>
 <body>
 <h1>Hello</h1>
-<form>
-	<input type="text" name="quote" action="{{ url_for('home') }}" method="POST" placeholder="Enter a quote">
+<form action="/home" method="POST">
+	<input type="submit" name="submit">
+	<input type="text" name="quote"  placeholder="Enter a quote" style="width:600px">
 </form>
-<br>
 <br>
 <form action="{{ url_for('signout') }}" method="POST">
 <button type="submit">Sign out</button>

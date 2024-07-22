@@ -29,7 +29,7 @@ def signup():
         return redirect(url_for('home'))
     except Exception as e:
         print(e)
-        return redirect(url_for('thanks'))
+        return redirect(url_for('error'))
   else:
     return render_template("signup.html")
 
@@ -44,15 +44,21 @@ def signin():
         return redirect(url_for('home'))
     except Exception as e:
       print(e)
-      return redirect(url_for('display'))
+      return redirect(url_for('error'))
   else:
     return render_template("signin.html")
 
-  # If the method is 'POST' take the inputs and signin the user with email & password.
-
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
-  return render_template("home.html")
+  if request.method == "POST":
+    quote = request.form['quote']
+    session['quotes'].append(quote)
+    session.modified = True
+    return redirect(url_for('thanks'))
+  else:
+    return render_template("home.html")
+
+
 
 @app.route('/thanks')
 def thanks():
@@ -60,13 +66,19 @@ def thanks():
 
 @app.route('/display')
 def display():
-  return render_template("display.html")
+  return render_template("display.html", quotes = session['quotes'])
+
 
 @app.route('/signout', methods=['POST'])
 def signout():
   session['user'] = None
   auth.current_user = None
   return redirect(url_for('signin'))
+
+@app.route('/error')
+def error():
+  return render_template('error.html')
+
 
 if __name__ == '__main__':
   app.run(debug=True)
