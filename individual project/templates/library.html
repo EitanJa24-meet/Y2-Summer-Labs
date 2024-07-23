@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>pbrary</title>
+</head>
+<body>
+<h1>These are all your Piphs:</h1>
+{% for i in user_ideas.values()%}
+	<p>The Piph is:<h3> {{i['piph']}}</h3></p>
+	<p>The Description is: <h4>{{i['description']}}</h4></p>
+	<p>The Category is: <h3>{{i['category']}}</h3></p>
+	<p>The publicity is: <h3>{{i['Publicity']}}</h3></p>
+	<br>
+	<br>
+{% endfor %}
+</body>
+</html>
+
+

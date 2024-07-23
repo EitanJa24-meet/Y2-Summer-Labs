@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Piph</title>
+</head>
+<body>
+<h1>Create a Piph</h1>
+<form action='/input' method="POST">
+	<label>Idea:</label>
+	<br>
+	<br>
+	<input type="text" name="piph" placeholder='Enter an Idea - a "Piph"'>
+	<br>
+	<br>
+	<label>Description:</label>
+	<br>
+	<br>
+	<input type="text" name="description" placeholder="Explain the Piph">
+	<br>
+	<br>
+    <label >Choose a category:</label>
+    <br>
+    <br>
+    <select id="categories" name="categories">
+		<option value=""></option>
+		<option value="technology">Technology</option>
+		<option value="health & fitness">Health & Fitness</option>
+		<option value="education">Education</option>
+		<option value="business & finance">Business & Finance</option>
+		<option value="entertainment">Entertainment</option>
+		<option value="environment">Environment</option>
+		<option value="social impact">Social Impact</option>
+		<option value="lifestyle">Lifestyle</option>
+		<option value="other">Other</option>
+    </select>
+    <br>
+    <br>
+    <label>Public or Private:</label>
+    <br>
+    <br>
+    <input type="radio" name="publicity" value="Public">Public
+    <input type="radio" name="publicity" value="Private">Private
+    <br>
+    <br>
+    <br>
+    <input type="submit" name="submit" value="Add Piph">
+</form>
+
+</body>
+</html>
