@@ -32,6 +32,9 @@ def signup():
     try:
       user = auth.create_user_with_email_and_password(email, password)
       session['localId'] = user['localId']
+      uid = session.get('localId')
+      names = {"name": username}
+      db.child("users").child(uid).set(names)
       return redirect(url_for('home'))
     except Exception as e:
         print(e) 
@@ -91,9 +94,44 @@ def library():
     user_ideas = {}
   return render_template("library.html", user_ideas = user_ideas)
 
+
+
+@app.route('/all', methods=['GET', 'POST'])
+def all():
+    piph = request.form['piph']
+    description = request.form['description']
+    category = request.form['categories']
+    try:
+      uid = session.get('localId')
+      name = request.form['username']
+       # db.child('users').child(uid).get().val()
+      return render_template("all.html", user_ideas = user_ideas)
+
+    @app.route('/all', methods=['GET'])
+    def all():
+        try:
+        # Fetch all pips from the database
+        piphs_data = db.child('piphs').get().val() or {}
+        
+        # Fetch all user information
+        users_data = db.child('users').get().val() or {}
+        
+        # Combine pips with usernames
+        piphs_with_usernames = {}
+        for uid, piphs in pips_data.items():
+            username = users_data.get(uid, {}).get('name', 'Unknown')
+            pips_with_usernames[uid] = {'username': username, 'piphs': piphs}
+
+            return render_template("all.html", pips_with_usernames=pips_with_usernames)
+        except Exception as e:
+            print(e)
+            return redirect(url_for('error'))
+
+
 @app.route("/error")
 def error():
   return render_template('error.html')
+
 
 # running the code
 if __name__ == '__main__':
