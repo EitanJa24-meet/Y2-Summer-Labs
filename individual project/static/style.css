@@ -167,6 +167,30 @@ input[type="submit"]:hover {
     background-color: #1e8449;
 }
 
+input[type="email"],
+select {
+    width: 95%;
+    padding: 15px;
+    margin: 10px 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    border: 1.2px solid;
+}
+
+input[type="password"],
+select {
+    width: 95%;
+    padding: 15px;
+    margin: 10px 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    border: 1.2px solid;
+}
+
 img {
     display: block;
     margin: 20px auto;
