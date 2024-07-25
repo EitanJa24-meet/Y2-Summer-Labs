@@ -7,8 +7,8 @@ import pyrebase
 firebaseConfig = {
   "apiKey": "AIzaSyDYIRwbDW3efTmgObZp-Ea2UuHjIyycvpA",
   "authDomain": "idea-platform-y2.firebaseapp.com",
-  "projectId": "idea-platform-y2",
   "storageBucket": "idea-platform-y2.appspot.com",
+  "projectId": "idea-platform-y2",
   "messagingSenderId": "553305009222",
   "appId": "1:553305009222:web:e235a9a92622310bbc6e47",
   "databaseURL":"https://idea-platform-y2-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -33,8 +33,8 @@ def signup():
       user = auth.create_user_with_email_and_password(email, password)
       session['localId'] = user['localId']
       uid = session.get('localId')
-      names = {"name": username}
-      db.child("users").child(uid).set(names)
+      name = {"name": username}
+      db.child("users").child(uid).set(name)
       return redirect(url_for('home'))
     except Exception as e:
         print(e) 
@@ -76,7 +76,8 @@ def input():
     publicity = request.form['publicity']
     try:
       uid = session.get('localId')
-      new_piph = {"piph": piph, "description": description, "category": category, "Publicity": publicity}
+      name = db.child('users').child(uid).get().val()
+      new_piph = {"name": name['name'],"piph": piph, "description": description, "category": category, "Publicity": publicity}
       db.child('piphs').child(uid).push(new_piph)
       return redirect(url_for('home'))
     except Exception as e:
@@ -94,38 +95,27 @@ def library():
     user_ideas = {}
   return render_template("library.html", user_ideas = user_ideas)
 
-
+@app.route('/signout', methods=['POST'])
+def signout():
+  session['user'] = None
+  auth.current_user = None
+  return redirect(url_for('login'))
 
 @app.route('/all', methods=['GET', 'POST'])
 def all():
-    piph = request.form['piph']
-    description = request.form['description']
-    category = request.form['categories']
+  if request.method == "GET":
     try:
-      uid = session.get('localId')
-      name = request.form['username']
-       # db.child('users').child(uid).get().val()
-      return render_template("all.html", user_ideas = user_ideas)
+      piphs = db.child('piphs').get().val()  
+      return render_template("all.html",piphs=piphs, category='All')
+    except Exception as e:
+      print(e)
+      return redirect(url_for('error'))
+  else:
+    piphs = db.child('piphs').get().val()  
+    category = request.form['categories']
+    return render_template("all.html",piphs=piphs, category=category)
 
-    @app.route('/all', methods=['GET'])
-    def all():
-        try:
-        # Fetch all pips from the database
-        piphs_data = db.child('piphs').get().val() or {}
-        
-        # Fetch all user information
-        users_data = db.child('users').get().val() or {}
-        
-        # Combine pips with usernames
-        piphs_with_usernames = {}
-        for uid, piphs in pips_data.items():
-            username = users_data.get(uid, {}).get('name', 'Unknown')
-            pips_with_usernames[uid] = {'username': username, 'piphs': piphs}
 
-            return render_template("all.html", pips_with_usernames=pips_with_usernames)
-        except Exception as e:
-            print(e)
-            return redirect(url_for('error'))
 
 
 @app.route("/error")

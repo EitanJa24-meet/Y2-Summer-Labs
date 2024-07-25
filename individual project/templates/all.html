@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Other's</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block title %}
+Other's Piphs - PiphPoint
+{% endblock %}
+
+{% block content %}
+<div id="others-piphs-container" class="content-container">
+    <h1>View other's Piphs:</h1>
+    <div class="category-selector">
+        <h2>Category:</h2>
+        <form action="/all" method="POST">
+            <select id="categories-all" name="categories">
+                <option value="All">All</option>
+                <option value="technology">Technology</option>
+                <option value="health & fitness">Health & Fitness</option>
+                <option value="education">Education</option>
+                <option value="business & finance">Business & Finance</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="environment">Environment</option>
+                <option value="social impact">Social Impact</option>
+                <option value="lifestyle">Lifestyle</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="submit" name="submit" value="Update">
+        </form>
+    </div>
+
+    <div class="piphs-list">
+        {% for i in piphs.values()%}
+        {% for x in i.values()%}
+        {% if x['Publicity'] == 'Public'%}
+        {% if category == 'All' or category == x['category']%}
+        <div class="piph-item">
+            <h2>{{x['piph']}}</h2>
+            <p class="description">Description: <span>{{x['description']}}</span></p>
+            <p class="username">Submitted by: <span>{{x['username']}}</span></p>
+            <p class="category">Category: <span>{{x['category']}}</span></p>
+        </div>
+        <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

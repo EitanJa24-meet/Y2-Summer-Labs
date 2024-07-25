@@ -4,27 +4,28 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Piph</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+
 </head>
 <body>
+{% extends "base.html" %}
+
+{% block title %}
+Home - PiphPoint
+{% endblock %}
+
+{% block content %}
 <h1>Create a Piph</h1>
 <form action='/input' method="POST">
-	<label>Idea:</label>
-	<br>
-	<br>
+	<label>Piph:</label>
 	<input type="text" name="piph" placeholder='Enter an Idea - a "Piph"'>
 	<br>
-	<br>
 	<label>Description:</label>
-	<br>
-	<br>
-	<input type="text" name="description" placeholder="Explain the Piph">
-	<br>
+	<textarea  id="description" name="description" placeholder="Explain the Piph"></textarea>
 	<br>
     <label >Choose a category:</label>
-    <br>
-    <br>
     <select id="categories" name="categories">
-		<option value=""></option>
+		<option value="All">All</option>
 		<option value="technology">Technology</option>
 		<option value="health & fitness">Health & Fitness</option>
 		<option value="education">Education</option>
@@ -35,18 +36,18 @@
 		<option value="lifestyle">Lifestyle</option>
 		<option value="other">Other</option>
     </select>
-    <br>
-    <br>
     <label>Public or Private:</label>
+   	<div class="radio-container">
+	    <label><input type="radio" name="publicity" value="Public"> Public</label>
+	    <label><input type="radio" name="publicity" value="Private"> Private</label>
+	</div>
+
     <br>
     <br>
-    <input type="radio" name="publicity" value="Public">Public
-    <input type="radio" name="publicity" value="Private">Private
-    <br>
-    <br>
-    <br>
+
     <input type="submit" name="submit" value="Add Piph">
 </form>
+{% endblock %}
 
 </body>
 </html>

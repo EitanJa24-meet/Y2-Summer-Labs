@@ -4,8 +4,18 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>home</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+
+
 </head>
 <body>
+{% extends "base.html" %}
+
+{% block title %}
+Home - PiphPoint
+{% endblock %}
+
+{% block content %}
 <h1>PiphPoint</h1>
 <a href="{{url_for('input')}}" ><button>Add a Piph</button></a>
 <br>
@@ -13,7 +23,15 @@
 <a href="{{url_for('library')}}" ><button>View all your Piphs</button></a>
 <br>
 <br>
-<a href="{{url_for('input')}}" ><button>Add a Piph</button></a>
+<a href="{{url_for('all')}}" ><button>View everyones Piphs</button></a>
+<br>
+<div class="signout-container">
+</form id="signout">
+<br>
+<form action="{{ url_for('signout') }}" method="POST">
+<button type="submit">Signout</button>
+</div>
+{% endblock %}
 
 </body>
 </html>

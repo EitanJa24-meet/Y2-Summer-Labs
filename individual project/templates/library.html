@@ -3,19 +3,29 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>library</title>
+	<title>Library</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <body>
+{% extends "base.html" %}
+
+{% block title %}
+Home - PiphPoint
+{% endblock %}
+
+{% block content %}
 <h1>These are all your Piphs:</h1>
-{% for i in user_ideas.values()%}
-	<h2> {{i['piph']}}</h2>
-	<p>The Description is: <h4>{{i['description']}}</h4></p>
-	<p>The Category is: <h3>{{i['category']}}</h3></p>
-	<p>The publicity is: <h3>{{i['Publicity']}}</h3></p>
-	<br>
-	<br>
-{% endfor %}
+<div class="stories-container">
+    {% for i in user_ideas.values()%}
+        <div class="story-box">
+            <h1>{{ i['piph'] }}</h1>
+            <h4><span style="font-size: 1.5em;">Description:   </span>{{ i['description'] }}</h4>
+            <h3><span style="font-size: 1.5em;">Category:  </span>{{ i['category'] }}</h3>
+            <h3><span style="font-size: 1.5em;">Publicity: </span>{{ i['Publicity'] }}</h3>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
 </body>
 </html>
-
-
