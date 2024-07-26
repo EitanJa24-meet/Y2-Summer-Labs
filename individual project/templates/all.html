@@ -40,10 +40,10 @@ Other's Piphs - PiphPoint
         {% for x in i.values()%}
         {% if x['Publicity'] == 'Public'%}
         {% if category == 'All' or category == x['category']%}
-        <div class="piph-item">
+        <div class="piph-item" style=" word-wrap: break-word;">
             <h2>{{x['piph']}}</h2>
             <p class="description">Description: <span>{{x['description']}}</span></p>
-            <p class="username">Submitted by: <span>{{x['username']}}</span></p>
+            <p class="username">Submitted by: <span>{{x['name']}}</span></p>
             <p class="category">Category: <span>{{x['category']}}</span></p>
         </div>
         <br>
